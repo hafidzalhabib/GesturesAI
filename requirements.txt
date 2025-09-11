@@ -2,3 +2,5 @@ opencv-python-headless
 streamlit
 streamlit-webrtc>=0.61.3
 streamlit_session_memo
+cvzone
+mediapipe
