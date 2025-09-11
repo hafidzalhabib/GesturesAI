@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer
 import av
-
+import cv2
  # Import Library
 import cvzone
 from cvzone.HandTrackingModule import HandDetector
@@ -62,5 +62,6 @@ with col_2:
         }
     )
  
+
 
 
