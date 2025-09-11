@@ -3,27 +3,60 @@ from streamlit_webrtc import webrtc_streamer
 import av
 import cv2
 
-st.title("My first Streamlit app")
-st.write("Hello, world")
+ # Import Library
+import cvzone
+from cvzone.HandTrackingModule import HandDetector
+import  numpy as np
+import google.generativeai as genai
+from PIL import Image
 
-def callback(frame):
-    img = frame.to_ndarray(format="bgr24")
-    img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
-    return av.VideoFrame.from_ndarray(img, format="bgr24")
+st.set_page_config(layout="wide")
+col_1, col_2 = st.columns([2,3])
 
-webrtc_streamer(
-    key="example",
-    video_frame_callback=callback,
-    rtc_configuration={
-        "iceServers": [
-            {"urls": ["stun:stun.l.google.com:19302"]},
-            {"urls": ["stun:stun1.l.google.com:19302"]},
-            {"urls": ["stun:stun2.l.google.com:19302"]},
-            {"urls": ["stun:stun3.l.google.com:19302"]},
-            {"urls": ["stun:stun4.l.google.com:19302"]},
-            {"urls": ["stun:stun.cloudflare.com:3478"]},
-            {"urls": ["stun:stun.stunprotocol.org:3478"]},
-            {"urls": ["stun:openrelay.metered.ca:80"]},
-        ]
-    }
-)
+with col_1:
+    input_text = st.text_input(label="Masukkan perintah")
+    st.subheader("Jawaban")
+    output_text_area = st.text("   ")
+with col_2:
+
+    def callback(frame):
+
+        img = frame.to_ndarray(format="bgr24")
+
+        detector = HandDetector(staticMode=False, maxHands=1, modelComplexity=1, detectionCon=0.5, minTrackCon=0.5)
+
+        hands, img = detector.findHands(img, draw=True, flipType=True)
+
+        # Check if any hands are detected
+        if hands:
+            # Information for the first hand detected
+            hand1 = hands[0]  # Get the first hand detected
+            lmList1 = hand1["lmList"]  # List of 21 landmarks for the first hand
+            bbox1 = hand1["bbox"]  # Bounding box around the first hand (x,y,w,h coordinates)
+            center1 = hand1['center']  # Center coordinates of the first hand
+            handType1 = hand1["type"]  # Type of the first hand ("Left" or "Right")
+
+
+
+
+
+
+        return av.VideoFrame.from_ndarray(img, format="bgr24")
+
+    webrtc_streamer(
+        key="example",
+        video_frame_callback=callback,
+        rtc_configuration={
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]},
+                {"urls": ["stun:stun1.l.google.com:19302"]},
+                {"urls": ["stun:stun2.l.google.com:19302"]},
+                {"urls": ["stun:stun3.l.google.com:19302"]},
+                {"urls": ["stun:stun4.l.google.com:19302"]},
+                {"urls": ["stun:stun.cloudflare.com:3478"]},
+                {"urls": ["stun:stun.stunprotocol.org:3478"]},
+                {"urls": ["stun:openrelay.metered.ca:80"]},
+            ]
+        }
+    )
+
