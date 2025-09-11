@@ -1,12 +1,8 @@
 streamlit
-streamlit-webrtc>=0.61.3
-streamlit_session_memo
+streamlit-webrtc
 av
 opencv-python-headless==4.8.0.76
 numpy
-cvzone==1.5.6
-mediapipe
+cvzone==1.6.1
 google-generativeai
 Pillow
-
-
