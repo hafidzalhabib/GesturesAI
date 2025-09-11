@@ -4,3 +4,8 @@ streamlit-webrtc>=0.61.3
 streamlit_session_memo
 cvzone
 mediapipe
+av
+cvzone
+numpy
+google-generativeai
+Pillow
