@@ -1,8 +1,9 @@
 streamlit
 streamlit-webrtc
 av
-opencv-python-headless==4.8.0.76
+opencv-python-headless
+cvzone
 numpy
-cvzone==1.6.1
-google-generativeai
+mediapipe
 Pillow
+google-generativeai
