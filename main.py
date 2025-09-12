@@ -47,9 +47,11 @@ with col_2:
                 {"urls": ["stun:stun.stunprotocol.org:3478"]},
                 {"urls": ["stun:openrelay.metered.ca:80"]},
             ]
-        }
+        },
+        media_stream_constraints={"video": True, "audio": False}
     )
  
+
 
 
 
