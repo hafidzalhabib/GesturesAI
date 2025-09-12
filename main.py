@@ -2,8 +2,8 @@ import streamlit as st
 from streamlit_webrtc import webrtc_streamer
 import av
 import cv2
-# from cvzone.HandTrackingModule import HandDetector
-# import  numpy as np
+from cvzone.HandTrackingModule import HandDetector
+import  numpy as np
 
 st.set_page_config(layout="wide")
 col_1, col_2 = st.columns([2,3])
@@ -14,21 +14,21 @@ with col_1:
     output_text_area = st.text("   ")
 with col_2:
 
-    # detector = HandDetector(staticMode=False, maxHands=1, modelComplexity=1, detectionCon=0.5, minTrackCon=0.5)
+    detector = HandDetector(staticMode=False, maxHands=1, modelComplexity=1, detectionCon=0.5, minTrackCon=0.5)
     def callback(frame):
 
         img = frame.to_ndarray(format="bgr24")
 
-        # hands, img = detector.findHands(img, draw=True, flipType=True)
+        hands, img = detector.findHands(img, draw=True, flipType=True)
 
         # Check if any hands are detected
-        # if hands:
-        #     # Information for the first hand detected
-        #     hand1 = hands[0]  # Get the first hand detected
-        #     lmList1 = hand1["lmList"]  # List of 21 landmarks for the first hand
-        #     bbox1 = hand1["bbox"]  # Bounding box around the first hand (x,y,w,h coordinates)
-        #     center1 = hand1['center']  # Center coordinates of the first hand
-        #     handType1 = hand1["type"]  # Type of the first hand ("Left" or "Right")
+        if hands:
+            # Information for the first hand detected
+            hand1 = hands[0]  # Get the first hand detected
+            lmList1 = hand1["lmList"]  # List of 21 landmarks for the first hand
+            bbox1 = hand1["bbox"]  # Bounding box around the first hand (x,y,w,h coordinates)
+            center1 = hand1['center']  # Center coordinates of the first hand
+            handType1 = hand1["type"]  # Type of the first hand ("Left" or "Right")
 
         return av.VideoFrame.from_ndarray(img, format="bgr24")
 
@@ -50,6 +50,7 @@ with col_2:
         }
     )
  
+
 
 
 
