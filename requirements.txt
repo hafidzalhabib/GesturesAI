@@ -1,9 +1,9 @@
 opencv-python-headless
 streamlit-webrtc
 av
-cv2
 cvzone
 mediapipe
+
 
 
 
