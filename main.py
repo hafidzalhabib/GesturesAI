@@ -91,6 +91,18 @@ with col_2:
         key="example",
         mode=WebRtcMode.SENDRECV,
         video_frame_callback=callback,
+        rtc_configuration={
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]},
+                {"urls": ["stun:stun1.l.google.com:19302"]},
+                {"urls": ["stun:stun2.l.google.com:19302"]},
+                {"urls": ["stun:stun3.l.google.com:19302"]},
+                {"urls": ["stun:stun4.l.google.com:19302"]},
+                {"urls": ["stun:stun.cloudflare.com:3478"]},
+                {"urls": ["stun:stun.stunprotocol.org:3478"]},
+                {"urls": ["stun:openrelay.metered.ca:80"]},
+            ]
+        },
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
@@ -102,3 +114,4 @@ if webrtc_ctx.state.playing:
         output_text_area.write(result)
     except queue.Empty:
         pass
+
