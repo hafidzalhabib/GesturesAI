@@ -3,6 +3,11 @@ streamlit-webrtc
 av
 cvzone
 mediapipe
+numpy
+google-generativeai
+pillow
+queue
+
 
 
 
