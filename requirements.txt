@@ -3,8 +3,7 @@ streamlit-webrtc
 av
 cvzone
 mediapipe
-pillow
-queue
+
 
 
 
