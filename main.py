@@ -5,8 +5,7 @@ import cv2
 from cvzone.HandTrackingModule import HandDetector
 import numpy as np
 import google.generativeai as genai
-from PIL import Image
-import queue
+
 
 st.set_page_config(layout="wide")
 col_1, col_2 = st.columns([2, 3])
@@ -17,16 +16,13 @@ col_1, col_2 = st.columns([2, 3])
 # if "out_text" not in st.session_state:
 #     st.session_state["out_text"] = ""
 
-# Queue untuk komunikasi antar-thread (callback → main thread)
-result_queue: "queue.Queue[str]" = queue.Queue()
 
 prev_pos = None
 canvas = None
 out_text = None
 
 # --- AI setup ---
-genai.configure(api_key="AIzaSyBl51omrFAuvo3LiqjSBRuzoMKV6mO6wNQ")  # simpan di st.secrets di production
-model = genai.GenerativeModel("gemini-1.5-flash")
+# 
 
 # ---------------- Fungsi ----------------
 def getHandInfo(img, detector):
@@ -83,10 +79,6 @@ with col_2:
             new_pos, canvas, fingers = draw(img, info, prev_pos, canvas)
             prev_pos = new_pos
 
-            # ai_result = sendToAI(model, canvas, fingers, input_text)
-            # if ai_result:  # hanya kirim jika ada hasil
-            #     print(ai_result)
-                # result_queue.put(ai_result)
 
         image_combined = cv2.addWeighted(img, 0.7, canvas, 1, 0)
         return av.VideoFrame.from_ndarray(image_combined, format="bgr24")
@@ -98,3 +90,4 @@ with col_2:
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True
     )
+
