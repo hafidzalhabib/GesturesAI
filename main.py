@@ -4,7 +4,6 @@ import av
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 import numpy as np
-import google.generativeai as genai
 
 
 st.set_page_config(layout="wide")
@@ -90,4 +89,5 @@ with col_2:
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True
     )
+
 
